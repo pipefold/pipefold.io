@@ -1,45 +1,12 @@
-"use client";
-import { useRef } from "react";
-import { VFXProvider, VFXSpan } from "react-vfx";
+import { PaperPlane } from "./components/PaperPlane";
+import R3F from "./components/R3F";
 
-const blink = `
-uniform vec2 resolution;
-uniform vec2 offset;
-uniform float time;
-uniform sampler2D src;
-// uniform vec2 changingValue; // ADD THIS LINE
+const Page = () => (
+  <div className="h-screen w-screen">
+    <R3F>
+      <PaperPlane />
+    </R3F>
+  </div>
+);
 
-void main() {
-    vec2 uv = (gl_FragCoord.xy - offset) / resolution;
-    gl_FragColor = texture2D(src, uv) * step(.5, fract(time));
-}
-`;
-
-const Home = () => {
-  const x = useRef(10);
-
-  return (
-    <>
-      <VFXProvider>
-        <VFXSpan
-          shader={blink}
-          uniforms={{
-            changingValue: () => [x.current, x.current], //  VEC2
-          }}
-        >
-          I'm blinking!
-        </VFXSpan>
-      </VFXProvider>
-      <button
-        type="button"
-        onClick={() => {
-          x.current *= -1;
-        }}
-      >
-        CLICK
-      </button>
-    </>
-  );
-};
-
-export default Home;
+export default Page;
