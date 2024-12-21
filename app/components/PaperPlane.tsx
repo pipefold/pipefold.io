@@ -2,10 +2,30 @@
 
 import { OrbitControls, useTexture } from "@react-three/drei";
 import * as THREE from "three";
+import { useEffect, useState } from "react";
+import { useThree } from "@react-three/fiber";
 
 export function PaperPlane() {
-  const width = 10;
-  const height = 10;
+  const { viewport, camera } = useThree();
+  const [dimensions, setDimensions] = useState({ width: 1, height: 1 });
+
+  useEffect(() => {
+    // Calculate dimensions to fill viewport
+    if (camera instanceof THREE.PerspectiveCamera) {
+      const distance = camera.position.z;
+      const fov = camera.fov * (Math.PI / 180);
+      const height = 2 * Math.tan(fov / 2) * distance;
+      const width = height * (viewport.width / viewport.height);
+      setDimensions({ width, height });
+    } else if (camera instanceof THREE.OrthographicCamera) {
+      // For orthographic camera, use the viewport directly
+      setDimensions({
+        width: viewport.width,
+        height: viewport.height,
+      });
+    }
+  }, [camera, viewport]);
+
   const lightOffset = 0.5;
 
   const [colorMap, normalMap, displacementMap] = useTexture([
@@ -16,34 +36,33 @@ export function PaperPlane() {
 
   [colorMap, normalMap, displacementMap].forEach((texture) => {
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(1, 1);
+    // Adjust texture repeat to maintain aspect ratio
+    texture.repeat.set(dimensions.width / 5, dimensions.height / 5);
   });
 
   return (
     <group>
       <mesh position={[0, 0, 0]} rotation={[0, 0, 0]}>
-        <planeGeometry args={[width, height, 256, 256]} />
+        <planeGeometry args={[dimensions.width, dimensions.height, 256, 256]} />
         <meshStandardMaterial
-          color="#f5e6d3"
-          // roughness={1}
-          // metalness={0}
+          color="#ffffff"
           map={colorMap}
           normalMap={normalMap}
           normalScale={[1.5, 1.5]}
           displacementMap={displacementMap}
-          displacementScale={0.1}
+          displacementScale={0.2}
           displacementBias={-0.05}
         />
       </mesh>
 
       <rectAreaLight
         position={[0, 0, lightOffset]}
-        width={width}
-        height={height}
+        width={dimensions.width}
+        height={dimensions.height}
         intensity={1}
         rotation={[0, 0, 0]}
       />
-      <OrbitControls />
+      {/* <OrbitControls /> */}
     </group>
   );
 }
