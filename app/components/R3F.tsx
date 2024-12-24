@@ -1,5 +1,6 @@
 "use client";
 
+import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
 const R3F = ({ children }: { children: React.ReactNode }) => {
@@ -9,6 +10,7 @@ const R3F = ({ children }: { children: React.ReactNode }) => {
         alpha: false,
       }}
     >
+      <OrbitControls />
       {children}
     </Canvas>
   );

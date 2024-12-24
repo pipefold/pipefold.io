@@ -1,14 +1,44 @@
 "use client";
-
-import { OrbitControls, useTexture } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import * as THREE from "three";
+import { useThree, createPortal } from "@react-three/fiber";
 import PaperText from "./PaperText";
+import { useTexture } from "@react-three/drei";
 
-export function PaperPlane() {
-  const { viewport, camera } = useThree();
+export function TexturedPaper() {
+  const { gl, viewport } = useThree();
   const [dimensions, setDimensions] = useState({ width: 1, height: 1 });
+
+  // 1. Position camera correctly
+  const camera = useMemo(() => {
+    const cam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 1000);
+    cam.position.z = 1;
+    return cam;
+  }, []);
+
+  // 2. Create render target with appropriate size
+  const renderTarget = useMemo(
+    () =>
+      new THREE.WebGLRenderTarget(2048, 2048, {
+        format: THREE.RGBAFormat,
+        stencilBuffer: false,
+        depthBuffer: true, // Add depth buffer
+      }),
+    []
+  );
+
+  const scene = useMemo(() => new THREE.Scene(), []);
+
+  // 3. Update render effect when text changes
+  useEffect(() => {
+    // Clear the render target
+    gl.setRenderTarget(renderTarget);
+    gl.clear();
+
+    // Render text to texture
+    gl.render(scene, camera);
+    gl.setRenderTarget(null);
+  }, [gl, scene, camera, renderTarget]);
 
   useEffect(() => {
     // Calculate dimensions to fill viewport
@@ -27,8 +57,6 @@ export function PaperPlane() {
     }
   }, [camera, viewport]);
 
-  const lightOffset = 0.5;
-
   const [colorMap, normalMap, displacementMap] = useTexture([
     "/assets/textures/Paper005/Paper005_1K-JPG_Color.jpg",
     "/assets/textures/Paper005/Paper005_1K-JPG_NormalGL.jpg",
@@ -42,35 +70,32 @@ export function PaperPlane() {
   });
 
   return (
-    <group>
-      <mesh position={[0, 0, 0]} rotation={[0, 0, 0]}>
+    <>
+      {createPortal(
+        <group>
+          <ambientLight intensity={1} /> {/* 4. Add lighting */}
+          <PaperText
+            text="Hello, Paper World"
+            position={[0, 0, 0]}
+            color="#000000"
+            size={0.5}
+          />
+        </group>,
+        scene
+      )}
+      <mesh>
         <planeGeometry args={[dimensions.width, dimensions.height, 256, 256]} />
         <meshStandardMaterial
-          color="#ffffff"
           map={colorMap}
           normalMap={normalMap}
           normalScale={[1.5, 1.5]}
           displacementMap={displacementMap}
           displacementScale={0.2}
           displacementBias={-0.05}
+          alphaMap={renderTarget.texture} // 5. Consider using map instead of alphaMap
+          transparent={true}
         />
       </mesh>
-
-      <PaperText
-        text="Hello, Paper World"
-        position={[0, 0, 0.1]}
-        color="#171717"
-        size={dimensions.width * 0.1} // Scale with viewport
-      />
-
-      <rectAreaLight
-        position={[0, 0, lightOffset]}
-        width={dimensions.width}
-        height={dimensions.height}
-        intensity={2}
-        rotation={[0, 0, 0]}
-      />
-      <OrbitControls />
-    </group>
+    </>
   );
 }
