@@ -9,6 +9,9 @@ const R3F = ({ children }: { children: React.ReactNode }) => {
       gl={{
         alpha: false,
       }}
+      onCreated={({ gl }) => {
+        gl.setClearColor("slategray");
+      }}
     >
       <OrbitControls />
       {children}
