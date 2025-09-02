@@ -1,0 +1,38 @@
+---
+import MainLayout from "../layouts/main.astro";
+import TSLHelloWorld from "../components/TSLHelloWorld.astro";
+import TSLHelloWorldReact from "../components/TSLHelloWorldReact.tsx";
+---
+
+<MainLayout content={{ title: "pipefold.io" }}>
+  <div
+    class="flex flex-col items-center justify-center min-h-screen gap-8 p-8 select-none"
+  >
+    <div class="text-center">
+      <div class="font-serif text-4xl font-semibold">Pipe Fold Ltd.</div>
+      <div class="font-mono text-xl font-thin">work in progress</div>
+      <div class="flex gap-6 font-serif text-xl justify-center mt-4">
+        <a
+          href="/portfolio"
+          class="py-2 px-4 text-primary underline-offset-4 hover:underline border border-primary-accent"
+          >Portfolio</a
+        >
+        <a
+          href="/resume"
+          class="py-2 px-4 text-primary underline-offset-4 hover:underline border border-primary-accent"
+          >Resume</a
+        >
+      </div>
+    </div>
+
+    <div class="w-full max-w-6xl">
+      <h2 class="text-2xl font-bold text-center mb-8">
+        TSL Hello World Examples
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <TSLHelloWorld />
+        <TSLHelloWorldReact client:load />
+      </div>
+    </div>
+  </div>
+</MainLayout>

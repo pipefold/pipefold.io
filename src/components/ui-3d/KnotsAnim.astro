@@ -1,0 +1,180 @@
+<canvas
+  id="three-background"
+  class="fixed inset-0 -z-10 pointer-events-none"
+  transition:persist></canvas>
+
+<script>
+  import * as THREE from "three";
+  import { getThemeColors, oklchToRGB } from "../../lib/colors.js";
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  );
+  camera.position.z = 0.5;
+  const canvas = document.getElementById(
+    "three-background"
+  ) as HTMLCanvasElement;
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true,
+  });
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  // Create starting geometry (p=2, q=3 for trefoil knot)
+  const startGeo = new THREE.TorusKnotGeometry(1, 0.4, 128, 32, 2, 3);
+
+  // Create target geometry with same segments but different knot (p=3, q=5 for more windings)
+  const targetGeo = new THREE.TorusKnotGeometry(1, 0.4, 128, 32, 3, 5);
+
+  // Copy target positions as a custom attribute to the starting geo
+  const targetPositions = targetGeo.getAttribute("position").array;
+  startGeo.setAttribute(
+    "targetPosition",
+    new THREE.BufferAttribute(targetPositions, 3)
+  );
+
+  // Get theme colors
+  const colors = getThemeColors();
+  const themeColor = oklchToRGB(colors.background);
+  const colorLinear = new THREE.Color()
+    .setRGB(themeColor.r, themeColor.g, themeColor.b)
+    .convertSRGBToLinear();
+
+  // Custom shader material with theme color support
+  const material = new THREE.ShaderMaterial({
+    uniforms: {
+      mixFactor: { value: 0.0 },
+      color: { value: colorLinear },
+    },
+    vertexShader: `
+        attribute vec3 targetPosition;
+        uniform float mixFactor;
+        void main() {
+          // Simple lerp between original and target positions
+          vec3 pos = mix(position, targetPosition, mixFactor);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+      `,
+    fragmentShader: `
+        uniform vec3 color;
+        void main() {
+          gl_FragColor = vec4(color, 1.0);
+        }
+      `,
+    wireframe: true, // Makes it look like a drone grid; toggle off for solid mesh
+    transparent: true,
+  });
+
+  const mesh = new THREE.Mesh(startGeo, material);
+  scene.add(mesh);
+
+  // Function to handle theme changes
+  function handleThemeChange() {
+    const colors = getThemeColors();
+    const bgColor = oklchToRGB(
+      colors.isDarkMode ? colors.background : colors.secondary
+    );
+    const bgColorLinear = new THREE.Color()
+      .setRGB(bgColor.r, bgColor.g, bgColor.b)
+      .convertSRGBToLinear();
+    material.uniforms.color.value = bgColorLinear;
+
+    renderer.setClearAlpha(0);
+  }
+
+  // Listen for theme changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === "class") {
+        handleThemeChange();
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+
+  // Animation loop
+  let time = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    time += 0.01;
+
+    // Ping-pong mix factor for looping morph (0 to 1 and back)
+    const mixFactor = Math.abs(Math.sin(time * 0.5));
+    material.uniforms.mixFactor.value = mixFactor;
+
+    // Create dynamic rotation with speed changes and direction reversals
+    const quaternion = new THREE.Quaternion();
+
+    // Create more dramatic speed variations with direction changes
+    const slowTime = time * 0.3; // Slower overall timing
+    const fastTime = time * 1.2; // Faster timing for some axes
+
+    // Y-axis: Dramatic speed changes with direction reversals
+    const ySpeedMultiplier = Math.sin(slowTime) * Math.sin(slowTime * 0.7);
+    const yDirection = Math.sign(ySpeedMultiplier);
+    const yRotationSpeed = Math.abs(ySpeedMultiplier) * 0.015;
+    const yQuat = new THREE.Quaternion().setFromAxisAngle(
+      new THREE.Vector3(0, 1, 0),
+      yRotationSpeed * yDirection
+    );
+
+    // X-axis: Twisting motion that pauses and reverses
+    const xSpeedMultiplier =
+      Math.sin(slowTime * 1.3) * Math.cos(slowTime * 0.5);
+    const xDirection = Math.sign(xSpeedMultiplier);
+    const xRotationSpeed = Math.abs(xSpeedMultiplier) * 0.008;
+    const xQuat = new THREE.Quaternion().setFromAxisAngle(
+      new THREE.Vector3(1, 0, 0),
+      xRotationSpeed * xDirection
+    );
+
+    // Z-axis: Subtle twisting that syncs with morphing extremes
+    const zSpeedMultiplier =
+      Math.sin(fastTime * 0.8) * (1 - Math.abs(mixFactor - 0.5) * 2);
+    const zDirection = Math.sign(zSpeedMultiplier);
+    const zRotationSpeed = Math.abs(zSpeedMultiplier) * 0.006;
+    const zQuat = new THREE.Quaternion().setFromAxisAngle(
+      new THREE.Vector3(0, 0, 1),
+      zRotationSpeed * zDirection
+    );
+
+    // Combine all rotations
+    quaternion.multiply(yQuat).multiply(xQuat).multiply(zQuat);
+
+    // Apply the quaternion to the mesh
+    mesh.quaternion.multiply(quaternion);
+
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // Handle resize
+  const handleResize = () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  };
+
+  window.addEventListener("resize", handleResize);
+
+  // Cleanup on page unload
+  window.addEventListener("beforeunload", () => {
+    observer.disconnect();
+    window.removeEventListener("resize", handleResize);
+    renderer.dispose();
+    startGeo.dispose();
+    targetGeo.dispose();
+    material.dispose();
+  });
+</script>

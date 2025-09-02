@@ -1,0 +1,84 @@
+---
+// Astro component with basic TSL hello world
+---
+
+<div
+  id="tsl-astro-container"
+  class="w-full h-96 border border-gray-300 rounded-lg bg-gray-100"
+>
+  <div class="p-4">
+    <h3 class="text-lg font-semibold mb-2">TSL Hello World (Astro)</h3>
+    <p class="text-sm text-gray-600 mb-4">
+      Basic TSL shader showing position colors
+    </p>
+  </div>
+</div>
+
+<script>
+  import * as THREE from "three";
+  import { color, positionLocal } from "three/tsl";
+
+  // Wait for DOM to be ready
+  document.addEventListener("DOMContentLoaded", async () => {
+    const container = document.getElementById("tsl-astro-container");
+
+    if (!container) return;
+
+    // Check for WebGPU support
+    if (!("gpu" in navigator)) {
+      container.innerHTML =
+        '<div class="p-4 text-red-500">WebGPU not supported</div>';
+      return;
+    }
+
+    try {
+      // Scene setup
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x111111);
+
+      // Camera
+      const camera = new THREE.PerspectiveCamera(75, 400 / 300, 0.1, 1000);
+      camera.position.z = 3;
+
+      // Renderer
+      const renderer = new (await import("three/webgpu")).WebGPURenderer({
+        antialias: true,
+      });
+      renderer.setSize(400, 300);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Clear the container and add renderer
+      const contentDiv = container.querySelector("div");
+      if (contentDiv) {
+        contentDiv.innerHTML = "";
+        contentDiv.appendChild(renderer.domElement);
+      }
+
+      // Basic TSL material - position colors
+      const material = new (
+        await import("three/webgpu")
+      ).MeshBasicNodeMaterial();
+      material.colorNode = positionLocal; // Use world position as color
+
+      // Create a cube
+      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+
+      // Animation loop
+      const animate = async () => {
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+
+        await renderer.renderAsync(scene, camera);
+        requestAnimationFrame(animate);
+      };
+
+      animate();
+    } catch (error) {
+      console.error("TSL setup failed:", error);
+      container.innerHTML =
+        '<div class="p-4 text-red-500">TSL initialization failed</div>';
+    }
+  });
+</script>

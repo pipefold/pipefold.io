@@ -1,0 +1,32 @@
+<style>
+  .text {
+    display: inline-block;
+    font-size: 48px;
+    font-family: monospace, sans-serif;
+  }
+  /* .cursor {
+    opacity: 0;
+  } */
+</style>
+
+<div class="text">
+  <div>pipe</div>
+  <div>fold</div>
+</div>
+
+<script>
+  import { text, utils } from "animejs";
+
+  const domTargetsArray = utils.$(".text");
+
+  domTargetsArray.forEach((domTarget) => {
+    if (domTarget instanceof HTMLElement) {
+      const { words, chars } = text.split(domTarget);
+
+      console.log({
+        words: words.map((word: HTMLElement) => word.textContent),
+        chars: chars.toString(),
+      });
+    }
+  });
+</script>
