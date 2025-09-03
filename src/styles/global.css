@@ -323,9 +323,20 @@
   background: linear-gradient(
     to right,
     rgba(var(--background-rgb), 0) 0%,
-    rgba(var(--background-rgb), 0.5) 20%,
-    rgba(var(--background-rgb), 1) 50%,
-    rgba(var(--background-rgb), 0.5) 80%,
+    rgba(var(--background-rgb), 0.2) 10%,
+    rgba(var(--background-rgb), 0.9) 50%,
+    rgba(var(--background-rgb), 0.2) 90%,
     rgba(var(--background-rgb), 0) 100%
   );
 }
+
+/* .prose-fade {
+  background: linear-gradient(
+    to right,
+    rgba(var(--background-rgb), 0) 0%,
+    rgba(var(--background-rgb), 0.5) 15%,
+    rgba(var(--background-rgb), 1) 50%,
+    rgba(var(--background-rgb), 0.5) 85%,
+    rgba(var(--background-rgb), 0) 100%
+  );
+} */
