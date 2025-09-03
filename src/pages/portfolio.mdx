@@ -2,22 +2,51 @@
 layout: ../layouts/main.astro
 ---
 
-import JellyHead from "@/components/ui-3d/JellyHead"
+
 
 <div class="max-w-4xl mx-auto prose">
 # Portfolio
 
-### Open Systems Lab
+## BuildX
 
-#### BuildX
+A prototype WikiHouse design tool that enables collaborative design and planning of modular housing systems.
 
-A prototype WikiHouse design tool.
+*Built at [Open Systems Lab](https://opensystemslab.io).* 
 
-[View Project ↗](https://github.com/pipefold/buildx-app)
+![BuildX Demo](/gifs/buildx-5.gif)
+*Interactive design interface showing real-time collaboration and 3D visualization capabilities*
 
-#### Atlas of Ownership
+**Links:**
+- [Live Demo ↗](https://buildx-qlcg2c1au-open-systems-labs-projects.vercel.app)
+- [Frontend Source ↗](https://github.com/theopensystemslab/buildx-app)
+- [Core Source ↗](https://github.com/theopensystemslab/buildx-core)
+- [Demo Video ↗](https://youtu.be/zqz8fud08VM)
 
-An open map of property rights and obligations across time and space
+## Atlas of Ownership
 
-[View Project  ↗](https://atlasofownership.org) 
+An open map of property rights and obligations across time and space, visualizing land ownership patterns and their historical context.
+
+*Built at [Open Systems Lab](https://opensystemslab.io).* 
+
+![Atlas of Ownership Demo](/gifs/aoo-1.gif)
+*Interactive map interface showing property ownership data visualization and historical timeline features*
+
+**Links:**
+- [Live Site ↗](https://atlasofownership.org)
+- [Frontend Source ↗](https://github.com/theopensystemslab/atlas-ownership-next)
+- [Backend Source ↗](https://github.com/theopensystemslab/aoo-sanity-v3)
+- [Demo Video ↗](https://youtu.be/GDdacImdcsw)
+
+## tsl-lib
+
+An in‑progress library of modular TSL (Three.js Shading Language) nodes and patterns for composing expressive, high‑performance graphics in the browser. The aim is to make creative pipelines feel intuitive by packaging clean building blocks—raymarching and volume rendering primitives, geometry morphing, and compute‑driven workflows—that can be mixed and tuned.
+
+*Part of Pipe Fold R&D.*
+
+Current focus: volumetric rendering of a 256×256×109 CT head (AIP/MIP/isosurface) with displacement effects, migrating to WebGPU compute for performance. In parallel, prototyping 3D spectrograms and real‑time volatility surfaces—all built from the same composable node toolkit.
+
+*Most experiments target WebGPU.*
+
 </div>
+
+<div class="fixed inset-0 -z-10 prose-fade"></div>

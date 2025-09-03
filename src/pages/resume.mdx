@@ -12,24 +12,24 @@ import Icon from "@/components/ui/Icon"
 
 </div>
 
-<div class="flex justify-between items-start gap-12 mb-8 mt-12">
+<div class="flex flex-wrap justify-between items-start gap-12 mb-8 mt-12">
 
-<div class="contact-links flex-[2]">
+<div class="contact-links flex-[2] min-w-80">
 
 ## <Pictogram name="world--community--grid" className='-scale-x-100' /> Contact & Links
 
-- [<Icon name="envelope" class="font-bold stroke-3" /> tom@pipefold.io](mailto:tom@pipefold.io)
-- [:github: github.com/pipefold](https://github.com/pipefold)
-- [<Icon name="linkedin"/> linkedin.com/in/thomasoneill](https://linkedin.com/in/pipefoldtom)
-- <Icon name="earth" />  London, UK
+- [<Icon name="envelope" className="inline-block transform translate-y-0.5 mr-0.5" /> tom@pipefold.io](mailto:tom@pipefold.io)
+- [<Icon name="portfolio" className="inline-block transform translate-y-0.5 mr-0.5" /> pipefold.io/portfolio](https://pipefold.io/portfolio)
+- [<span class="inline-block transform translate-y-0.5 -translate-x-0.5 scale-90">:github:</span> github.com/pipefold](https://github.com/pipefold)
+- <Icon name="earth" className="inline-block transform translate-y-0.5 mr-0.5" />  <span class="font-medium">London, UK</span>
 
 </div>
 
-<div class="flex-[3]">
+<div class="flex-[3] min-w-80">
 
 ## <Pictogram name="tornado" className='scale-90 translate-y-4' /> Synopsis
 
-Software engineer specializing in web development, with expertise in 3D technologies using Three.js and the React ecosystem (including Next.js and TypeScript). Built and deployed projects from prototype to production, with a foundation in backend systems, DevOps, and functional programming. Self-taught polyglot programmer skilled in languages like Python and Rust, with interests in p2p technologies, cryptography, Bitcoin, and innovative systems.
+Software engineer specializing in web technologies, with expertise in 3D graphics using Three.js, and in the React ecosystem (including Next.js and TypeScript). Built and deployed projects from prototype to production, with a foundation in backend systems, DevOps, and functional programming. Self-taught polyglot programmer skilled in languages like Python and Rust, with interests in p2p technologies, cryptography, Bitcoin, and innovative systems.
 
 </div>
 
@@ -46,38 +46,50 @@ October 2024 - Present
 
 lorem ipsum */}
 
-### Lead 3D Web Engineer
+<div class="space-y-6 pt-4">
 
-Open Systems Lab, Remote/UK  
-November 2021 – March 2025
+<div class="space-y-1">
+<div class="flex justify-between items-baseline">
+  <h3>Lead 3D Web Engineer @ <a href="https://opensystemslab.io/" target="_blank" rel="noopener noreferrer">Open Systems Lab</a></h3>
+  <span class="text-sm text-gray-500 italic">November 2021 – March 2025</span>
+</div>
 
-- Led development of [<span>BuildX</span> :github:](https://github.com/pipefold/buildx-app/blob/main/README.md) prototype: 3D web app for modular housing design (WikiHouse integration); real-time parametric modeling, interactive 3D manipulations (oriented bounding box collision, three-bvh-csg), geospatial site selection (Mapbox GL, Turf.js), analytics for carbon/cost estimates, outputs (bill of materials, CSV/3D exports).
-- Directed frontend redevelopment of [<span>Atlas of Ownership</span> :globe_with_meridians:](https://atlasofownership.org): Mapbox GL/Next.js platform for browsing land ownership on 3D globe; synchronized routing, SSR, navigation, and interactive visualizations.
+- Led frontend engineering of <a href="https://github.com/pipefold/buildx-app" target="_blank" rel="noopener noreferrer"><span>BuildX</span></a>, a 3D web app for modular housing design (WikiHouse integration); real-time parametric modeling, interactive 3D manipulations (oriented bounding box collision, three-bvh-csg), geospatial site selection (Mapbox GL, Turf.js), analytics for carbon/cost estimates, outputs (bill of materials, CSV/3D exports).
+- Directed frontend development of <a href="https://github.com/theopensystemslab/atlas-ownership-next" target="_blank" rel="noopener noreferrer"><span>Atlas of Ownership</span></a>, a Mapbox GL/Next.js platform for browsing land ownership on 3D globe; synchronized routing, SSR, navigation, and interactive visualizations.
+</div>
 
-### Co-Founder & Lead Developer
+<div class="space-y-1">
+<div class="flex justify-between items-baseline">
+  <h3>Co-Founder & Lead Developer @ <a href="https://bearjam-dev.vercel.app/" target="_blank" rel="noopener noreferrer">Bearjam</a></h3>
+  <span class="text-sm text-gray-500 italic">January 2020 – November 2021</span>
+</div>
 
-Bearjam (defunct), Remote  
-January 2020 – November 2021
-
-- Developed Dream Builder: 2D digital vision boarding app in 3D space using React Three Fiber; documented in blog series.
+- Developed <a href="https://dream-builder.vercel.app/" target="_blank" rel="noopener noreferrer"><span>Dream Builder</span></a>, a 2D digital vision boarding app in 3D space using React Three Fiber; documented in blog series.
 - Built Bear Bookshop: E-commerce site with Stripe/iZettle integrations for payments and POS.
+</div>
 
-### Prospective Founder
-
-Free the Data via Social Digital Innovation, Berlin, Germany  
-June 2017 – December 2017
+<div class="space-y-1">
+<div class="flex justify-between items-baseline">
+  <h3>Prospective Founder @ <a href="https://sdinnovation.org/projects/#freethedata" target="_blank" rel="noopener noreferrer">Free the Data</a></h3>
+  <span class="text-sm text-gray-500 italic">June 2017 – December 2017</span>
+</div>
 
 - Developed business plan and open-source software concept for user-managed distributed data stores.
 - Prototyped React Native mobile app for location tracking; built skills in entrepreneurship and decentralized systems.
+</div>
 
-### Systems Engineer & Developer
-
-Claranet, London, UK  
-November 2015 – April 2017
+<div class="space-y-1">
+<div class="flex justify-between items-baseline">
+  <h3>Systems Engineer & Developer @ <a href="https://claranet.com" target="_blank" rel="noopener noreferrer">Claranet</a></h3>
+  <span class="text-sm text-gray-500 italic">November 2015 – April 2017</span>
+</div>
 
 - Automated network/server configs using DevOps tools (Docker, Kubernetes, Ansible); programmed in Python, Golang, shell scripting.
 - Deployed OpenStack POC and contributed to OpenStack Kolla for Neutron BGP routing.
 - Built in-house tools: Java UI/REST API, Perl automation scripts.
+</div>
+
+</div>
 
 <div className="mt-12" />
 

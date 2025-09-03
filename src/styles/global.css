@@ -49,6 +49,7 @@
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
+  --background-rgb: 255, 255, 255;
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);
@@ -83,6 +84,7 @@
 
 .dark {
   --background: oklch(0.141 0.005 285.823);
+  --background-rgb: 36, 36, 36;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.21 0.006 285.885);
   --card-foreground: oklch(0.985 0 0);
@@ -126,6 +128,8 @@
 
 .prose {
   @apply max-w-5xl text-foreground text-sm;
+
+  @apply py-8 px-4;
 
   & h1,
   & h2,
@@ -196,6 +200,7 @@
   & a:hover span:not(.not-prose a:hover span) {
     @apply underline underline-offset-4;
   }
+
   & blockquote:not(.not-prose blockquote) {
     @apply mt-6 border-l-2 pl-6 italic;
   }
@@ -314,5 +319,66 @@
 
   & li {
     @apply list-none;
+  }
+}
+
+.prose-fade {
+  background: linear-gradient(
+    to right,
+    rgba(var(--background-rgb), 0) 0%,
+    rgba(var(--background-rgb), 0.2) 10%,
+    rgba(var(--background-rgb), 0.9) 50%,
+    rgba(var(--background-rgb), 0.2) 90%,
+    rgba(var(--background-rgb), 0) 100%
+  );
+}
+
+/* .prose-fade {
+  background: linear-gradient(
+    to right,
+    rgba(var(--background-rgb), 0) 0%,
+    rgba(var(--background-rgb), 0.5) 15%,
+    rgba(var(--background-rgb), 1) 50%,
+    rgba(var(--background-rgb), 0.5) 85%,
+    rgba(var(--background-rgb), 0) 100%
+  );
+} */
+
+@media print {
+  canvas {
+    display: none !important;
+  }
+
+  .prose-fade {
+    background: none;
+  }
+}
+
+/* Chaotic portfolio grid - masonry style with random flair */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns on larger viewports */
+  grid-gap: 2rem; /* Space between cards */
+  padding: 2rem 0;
+}
+
+/* Each card like a pictogram square */
+.portfolio-card {
+  background: var(--background); /* Tie into your theme */
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle depth */
+}
+
+/* Removed initial rotations for simplicity */
+
+/* No hover effects */
+
+/* Mobile fallback: linear stack */
+@media (max-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr; /* Single column */
+  }
+  .portfolio-card {
+    transform: none; /* Remove any transforms for readability */
   }
 }
