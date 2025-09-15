@@ -340,3 +340,13 @@
     rgba(var(--background-rgb), 0) 100%
   );
 } */
+
+@media print {
+  canvas {
+    display: none !important;
+  }
+
+  .prose-fade {
+    background: none;
+  }
+}
