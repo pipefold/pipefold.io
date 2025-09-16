@@ -354,10 +354,7 @@
 /* Chaotic portfolio grid - masonry style with random flair */
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(250px, 1fr)
-  ); /* Auto-fills columns, staggered heights */
+  grid-template-columns: 1fr 1fr; /* Two columns on larger viewports */
   grid-gap: 2rem; /* Space between cards */
   padding: 2rem 0;
 }
