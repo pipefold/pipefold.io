@@ -3,23 +3,76 @@ layout: ../layouts/main.astro
 ---
 
 import JellyHead from "@/components/ui-3d/JellyHead"
+// Add this for the tsl-lib demo (component to be created separately)
+// import RaymarchHead from "@/components/ui-3d/RaymarchHead.astro"
 
 <div class="max-w-4xl mx-auto prose">
 # Portfolio
 
+<div class="portfolio-grid"> {/* New container for chaotic layout */}
+
+{/* Professional Projects card */}
+<div class="portfolio-card">
+
+## Professional Projects
+
+Highlighting client and employer work where I've delivered production-grade solutions.
+
 ### Open Systems Lab
+
+[Open Systems Lab](https://opensystemslab.io) is a research and development company focused on creating open, accessible tools for understanding complex systems and building more sustainable futures.
 
 #### BuildX
 
-A prototype WikiHouse design tool.
+A prototype WikiHouse design tool that enables collaborative design and planning of modular housing systems.
 
-[View Project ↗](https://github.com/pipefold/buildx-app)
+![BuildX Demo](/gifs/buildx-5.gif)
+*Interactive design interface showing real-time collaboration and 3D visualization capabilities*
+
+**Links:**
+- [Live Demo ↗](https://buildx.opensystemslab.io)
+- [Frontend Source ↗](https://github.com/opensystemslab/buildx-app)
+- [Backend Source ↗](https://github.com/opensystemslab/buildx-api)
+- [Demo Video ↗](https://youtube.com/watch?v=buildx-demo)
 
 #### Atlas of Ownership
 
-An open map of property rights and obligations across time and space
+An open map of property rights and obligations across time and space, visualizing land ownership patterns and their historical context.
 
-[View Project  ↗](https://atlasofownership.org) 
+![Atlas of Ownership Demo](/gifs/aoo-1.gif)
+*Interactive map interface showing property ownership data visualization and historical timeline features*
+
+**Links:**
+- [Live Site ↗](https://atlasofownership.org)
+- [Source Code ↗](https://github.com/opensystemslab/atlas-of-ownership)
+- [Demo Video ↗](https://youtube.com/watch?v=atlas-demo) 
+</div>
+
+{/* Personal Projects card */}
+<div class="portfolio-card">
+## Personal Projects &amp; Demos
+Open-source experiments and utilities I've built to explore cutting-edge tech like shaders and WebGPU. These showcase my hands-on skills in creative coding.
+
+### TSL Patterns Library
+A library of reusable Three.js Shader Language (TSL) patterns for efficient, vibe-driven 3D effects. Includes raymarching examples with compute textures. [View on GitHub ↗](https://github.com/pipefold/tsl-lib) | [npm package ↗](https://www.npmjs.com/package/tsl-lib)
+
+{/* <RaymarchHead /> Interactive demo—tweak parameters to see real-time raymarching */}
+</div>
+
+{/* Ideas &amp; Concepts card */}
+<div class="portfolio-card">
+## Ideas &amp; Concepts
+Backburner explorations and innovative ideas I'm prototyping or planning. These highlight my interest in emerging tech like p2p systems and GPU computing—open to collaborations!
+
+### Nostr Semantic Matching
+A decentralized app using Nostr protocol with semantic search (e.g., via embeddings) to connect users based on shared interests/ideas. Could evolve into a "semantic social network." Status: Concept stage; prototyping semantic matching logic.
+
+### Mumax3 on WebGPU
+Porting the Mumax3 micromagnetic simulator to WebGPU for browser-based simulations. Untapped potential for accessible scientific computing—no native installs needed. Status: Research phase; exploring WebGPU compute shaders.
+</div>
+
+</div> {/* End of portfolio-grid */}
+
 </div>
 
 <div class="fixed inset-0 -z-10 prose-fade"></div>
