@@ -2,27 +2,14 @@
 layout: ../layouts/main.astro
 ---
 
-import JellyHead from "@/components/ui-3d/JellyHead"
-// Add this for the tsl-lib demo (component to be created separately)
-// import RaymarchHead from "@/components/ui-3d/RaymarchHead.astro"
-
 <div class="max-w-4xl mx-auto prose">
 # Portfolio
 
-<div class="portfolio-grid"> {/* New container for two-column layout */}
-
-{/* Professional Projects card */}
-<div class="portfolio-card">
-
-## Professional Projects
-
-Highlighting client and employer work where I've delivered production-grade solutions.
-
-### Open Systems Lab
+## Open Systems Lab Projects
 
 [Open Systems Lab](https://opensystemslab.io) is a research and development company focused on creating open, accessible tools for understanding complex systems and building more sustainable futures.
 
-#### BuildX
+### BuildX
 
 A prototype WikiHouse design tool that enables collaborative design and planning of modular housing systems.
 
@@ -35,7 +22,7 @@ A prototype WikiHouse design tool that enables collaborative design and planning
 - [Backend Source ↗](https://github.com/opensystemslab/buildx-api)
 - [Demo Video ↗](https://youtube.com/watch?v=buildx-demo)
 
-#### Atlas of Ownership
+### Atlas of Ownership
 
 An open map of property rights and obligations across time and space, visualizing land ownership patterns and their historical context.
 
@@ -45,25 +32,7 @@ An open map of property rights and obligations across time and space, visualizin
 **Links:**
 - [Live Site ↗](https://atlasofownership.org)
 - [Source Code ↗](https://github.com/opensystemslab/atlas-of-ownership)
-- [Demo Video ↗](https://youtube.com/watch?v=atlas-demo) 
-</div>
-
-{/* Right: Other work consolidated */}
-<div class="portfolio-card">
-## Other Projects
-Open-source experiments, demos, and concept work.
-
-### TSL Patterns Library
-A library of reusable Three.js Shader Language (TSL) patterns for efficient, vibe-driven 3D effects. Includes raymarching examples with compute textures. [View on GitHub ↗](https://github.com/pipefold/tsl-lib) | [npm package ↗](https://www.npmjs.com/package/tsl-lib)
-
-### Nostr Semantic Matching
-A decentralized app using Nostr protocol with semantic search (e.g., via embeddings) to connect users based on shared interests/ideas. Could evolve into a "semantic social network." Status: Concept stage; prototyping semantic matching logic.
-
-### Mumax3 on WebGPU
-Porting the Mumax3 micromagnetic simulator to WebGPU for browser-based simulations. Untapped potential for accessible scientific computing—no native installs needed. Status: Research phase; exploring WebGPU compute shaders.
-</div>
-
-</div> {/* End of portfolio-grid */}
+- [Demo Video ↗](https://youtube.com/watch?v=atlas-demo)
 
 </div>
 
