@@ -2,7 +2,7 @@
 import { Font } from "astro:assets";
 import "../styles/global.css";
 import { ModeToggle } from "@/components/ui/ModeToggle";
-import KnotsAnim from "@/components/ui-3d/KnotsAnim.astro";
+import Background3D from "@/components/ui-3d/Background3D";
 const { content } = Astro.props;
 import { ClientRouter } from "astro:transitions";
 import JellyHead from "@/components/ui-3d/JellyHead";
@@ -44,7 +44,7 @@ import JellyHead from "@/components/ui-3d/JellyHead";
     </script>
   </head>
   <body>
-    <KnotsAnim />
+    <Background3D client:only="react" transition:persist />
     <!-- <JellyHead client:load /> -->
     <div class="fixed top-4 right-4 z-50 print:hidden">
       <ModeToggle client:only />
