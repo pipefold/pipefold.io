@@ -7,44 +7,59 @@ import TSLHelloWorld from "../components/TSLHelloWorld.astro";
 <div class="max-w-4xl mx-auto prose">
 # Portfolio
 
-## Open Systems Lab Projects
+<div class="portfolio-layout">
+  <section class="portfolio-osl">
+  
+  ## Professional Projects
+  
+  ### Open Systems Lab
+  [Open Systems Lab](https://opensystemslab.io) is a research and development company focused on creating open, accessible tools for understanding complex systems and building more sustainable futures.
+  
+  <div class="portfolio-grid">
+    <article class="portfolio-card">
+      <h4>BuildX</h4>
+      <p>A prototype WikiHouse design tool that enables collaborative design and planning of modular housing systems.</p>
+      <img src="/gifs/buildx-5.gif" alt="BuildX Demo" />
+      <p class="muted">Interactive design interface showing real-time collaboration and 3D visualization capabilities</p>
+      <p><strong>Links:</strong></p>
+      <ul>
+        <li><a href="https://buildx.opensystemslab.io"><span>Live Demo ↗</span></a></li>
+        <li><a href="https://github.com/opensystemslab/buildx-app"><span>Frontend Source ↗</span></a></li>
+        <li><a href="https://github.com/opensystemslab/buildx-api"><span>Backend Source ↗</span></a></li>
+        <li><a href="https://youtube.com/watch?v=buildx-demo"><span>Demo Video ↗</span></a></li>
+      </ul>
+    </article>
+    <article class="portfolio-card">
+      <h4>Atlas of Ownership</h4>
+      <p>An open map of property rights and obligations across time and space, visualizing land ownership patterns and their historical context.</p>
+      <img src="/gifs/aoo-1.gif" alt="Atlas of Ownership Demo" />
+      <p class="muted">Interactive map interface showing property ownership data visualization and historical timeline features</p>
+      <p><strong>Links:</strong></p>
+      <ul>
+        <li><a href="https://atlasofownership.org"><span>Live Site ↗</span></a></li>
+        <li><a href="https://github.com/opensystemslab/atlas-of-ownership"><span>Source Code ↗</span></a></li>
+        <li><a href="https://youtube.com/watch?v=atlas-demo"><span>Demo Video ↗</span></a></li>
+      </ul>
+    </article>
+  </div>
+  
+  </section>
 
-[Open Systems Lab](https://opensystemslab.io) is a research and development company focused on creating open, accessible tools for understanding complex systems and building more sustainable futures.
-
-### BuildX
-
-A prototype WikiHouse design tool that enables collaborative design and planning of modular housing systems.
-
-![BuildX Demo](/gifs/buildx-5.gif)
-*Interactive design interface showing real-time collaboration and 3D visualization capabilities*
-
-**Links:**
-- [Live Demo ↗](https://buildx.opensystemslab.io)
-- [Frontend Source ↗](https://github.com/opensystemslab/buildx-app)
-- [Backend Source ↗](https://github.com/opensystemslab/buildx-api)
-- [Demo Video ↗](https://youtube.com/watch?v=buildx-demo)
-
-### Atlas of Ownership
-
-An open map of property rights and obligations across time and space, visualizing land ownership patterns and their historical context.
-
-![Atlas of Ownership Demo](/gifs/aoo-1.gif)
-*Interactive map interface showing property ownership data visualization and historical timeline features*
-
-**Links:**
-- [Live Site ↗](https://atlasofownership.org)
-- [Source Code ↗](https://github.com/opensystemslab/atlas-of-ownership)
-- [Demo Video ↗](https://youtube.com/watch?v=atlas-demo)
-
-## Pipe Fold R&D
-
-### tsl-lib
-
-An ongoing set of shader experiments exploring Three.js Shading Language (TSL). This work sharpens my shader tooling and techniques for high‑performance, interactive web graphics.
-
-<TSLHelloWorld />
-
-*Requires a modern browser with WebGPU support.*
+  <section class="portfolio-card portfolio-rnd">
+  
+  ## Pipe Fold R&D
+  
+  ### tsl-lib
+  
+  An ongoing set of shader experiments exploring Three.js Shading Language (TSL). This work sharpens my shader tooling and techniques for high‑performance, interactive web graphics.
+  
+  <TSLHelloWorld />
+  
+  *Requires a modern browser with WebGPU support.*
+  
+  </section>
+  
+</div>
 
 </div>
 

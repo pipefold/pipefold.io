@@ -366,6 +366,41 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle depth */
 }
 
+/* Gerstner-ish diagonal layout for portfolio sections */
+.portfolio-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    ". rnd"
+    "osl .";
+  gap: 0;
+  padding-block: 1rem;
+}
+
+.portfolio-osl {
+  grid-area: osl;
+  align-self: start;
+  justify-self: end;
+}
+
+.portfolio-rnd {
+  grid-area: rnd;
+  align-self: end;
+  justify-self: start;
+}
+
+@media (max-width: 768px) {
+  .portfolio-layout {
+    display: block;
+  }
+  .portfolio-osl,
+  .portfolio-rnd {
+    align-self: auto;
+    justify-self: auto;
+  }
+}
+
 /* Removed initial rotations for simplicity */
 
 /* No hover effects */

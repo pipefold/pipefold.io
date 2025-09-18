@@ -1,0 +1,20 @@
+---
+layout: ../layouts/main.astro
+---
+
+import Gallery3D from "../components/ui-3d/Gallery3D";
+
+<div class="max-w-5xl mx-auto prose">
+# Portfolio (3D Gallery)
+
+A curated, interactive 3D gallery showcasing selected work. Explore the space and inspect each framed piece.
+</div>
+
+<div class="my-8"></div>
+
+<Gallery3D client:load />
+
+<div class="fixed inset-0 -z-10 prose-fade"></div>
+
+
+
