@@ -129,6 +129,8 @@
 .prose {
   @apply max-w-5xl text-foreground text-sm;
 
+  @apply py-8 px-4;
+
   & h1,
   & h2,
   & h3,
