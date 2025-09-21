@@ -200,6 +200,7 @@
   & a:hover span:not(.not-prose a:hover span) {
     @apply underline underline-offset-4;
   }
+
   & blockquote:not(.not-prose blockquote) {
     @apply mt-6 border-l-2 pl-6 italic;
   }
