@@ -2,31 +2,31 @@
 layout: ../layouts/main.astro
 ---
 
-import TSLHelloWorld from "../components/TSLHelloWorld.astro";
+
 
 <div class="max-w-4xl mx-auto prose">
 # Portfolio
 
-## Open Systems Lab Projects
-
-[Open Systems Lab](https://opensystemslab.io) is a research and development company focused on creating open, accessible tools for understanding complex systems and building more sustainable futures.
-
-### BuildX
+## BuildX
 
 A prototype WikiHouse design tool that enables collaborative design and planning of modular housing systems.
+
+*Built at [Open Systems Lab](https://opensystemslab.io).* 
 
 ![BuildX Demo](/gifs/buildx-5.gif)
 *Interactive design interface showing real-time collaboration and 3D visualization capabilities*
 
 **Links:**
-- [Live Demo ↗](https://buildx-qlcg2c1au-open-systems-labs-projects.vercel.app/build/overview)
+- [Live Demo ↗](https://buildx-qlcg2c1au-open-systems-labs-projects.vercel.app)
 - [Frontend Source ↗](https://github.com/theopensystemslab/buildx-app)
 - [Core Source ↗](https://github.com/theopensystemslab/buildx-core)
 - [Demo Video ↗](https://youtu.be/zqz8fud08VM)
 
-### Atlas of Ownership
+## Atlas of Ownership
 
 An open map of property rights and obligations across time and space, visualizing land ownership patterns and their historical context.
+
+*Built at [Open Systems Lab](https://opensystemslab.io).* 
 
 ![Atlas of Ownership Demo](/gifs/aoo-1.gif)
 *Interactive map interface showing property ownership data visualization and historical timeline features*
@@ -37,15 +37,15 @@ An open map of property rights and obligations across time and space, visualizin
 - [Backend Source ↗](https://github.com/theopensystemslab/aoo-sanity-v3)
 - [Demo Video ↗](https://youtu.be/GDdacImdcsw)
 
-## Pipe Fold R&D
+## tsl-lib
 
-### tsl-lib
+An in‑progress library of modular TSL (Three.js Shading Language) nodes and patterns for composing expressive, high‑performance graphics in the browser. The aim is to make creative pipelines feel intuitive by packaging clean building blocks—raymarching and volume rendering primitives, geometry morphing, and compute‑driven workflows—that can be mixed and tuned.
 
-An ongoing set of shader experiments exploring Three.js Shading Language (TSL). This work sharpens my shader tooling and techniques for high‑performance, interactive web graphics.
+*Part of Pipe Fold R&D.*
 
-<TSLHelloWorld />
+Current focus: volumetric rendering of a 256×256×109 CT head (AIP/MIP/isosurface) with displacement effects, migrating to WebGPU compute for performance. In parallel, prototyping 3D spectrograms and real‑time volatility surfaces—all built from the same composable node toolkit.
 
-*Requires a modern browser with WebGPU support.*
+*Most experiments target WebGPU.*
 
 </div>
 
